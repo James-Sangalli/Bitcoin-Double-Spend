@@ -1,0 +1,2157 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NBitcoin</name>
+    </assembly>
+    <members>
+        <member name="T:NBitcoin.Base58Data">
+            <summary>
+            Base class for all Base58 check representation of data
+            </summary>
+        </member>
+        <member name="T:NBitcoin.KeyPath">
+            <summary>
+            Represent a path in the hierarchy of HD keys (BIP32)
+            </summary>
+        </member>
+        <member name="M:NBitcoin.KeyPath.Parse(System.String)">
+            <summary>
+            Parse a KeyPath
+            </summary>
+            <param name="path">The KeyPath formated like 10/0/2'/3</param>
+            <returns></returns>
+        </member>
+        <member name="T:NBitcoin.Mnemonic">
+            <summary>
+            A .NET implementation of the Bitcoin Improvement Proposal - 39 (BIP39)
+            BIP39 specification used as reference located here: https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki
+            Made by thashiznets@yahoo.com.au
+            v1.0.1.1
+            I ♥ Bitcoin :)
+            Bitcoin:1ETQjMkR1NNh4jwLuN5LxY7bMsHC9PUPSV
+            </summary>
+        </member>
+        <member name="M:NBitcoin.Mnemonic.#ctor(NBitcoin.Wordlist,System.Byte[])">
+            <summary>
+            Generate a mnemonic
+            </summary>
+            <param name="wordList"></param>
+            <param name="entropy"></param>
+        </member>
+        <member name="M:NBitcoin.Wordlist.#ctor(System.String[],System.Char,System.String)">
+            <summary>
+            Constructor used by inheritence only
+            </summary>
+            <param name="words">The words to be used in the wordlist</param>
+        </member>
+        <member name="M:NBitcoin.Wordlist.WordExists(System.String,System.Int32@)">
+            <summary>
+            Method to determine if word exists in word list, great for auto language detection
+            </summary>
+            <param name="word">The word to check for existence</param>
+            <returns>Exists (true/false)</returns>
+        </member>
+        <member name="M:NBitcoin.Wordlist.GetWordAtIndex(System.Int32)">
+            <summary>
+            Returns a string containing the word at the specified index of the wordlist
+            </summary>
+            <param name="index">Index of word to return</param>
+            <returns>Word</returns>
+        </member>
+        <member name="P:NBitcoin.Wordlist.WordCount">
+            <summary>
+            The number of all the words in the wordlist
+            </summary>
+        </member>
+        <member name="T:NBitcoin.BitcoinScriptAddress">
+            <summary>
+            Base58 representaiton of a script hash
+            </summary>
+        </member>
+        <member name="T:NBitcoin.BitcoinAddress">
+            <summary>
+            Base58 representation of a bitcoin address
+            </summary>
+        </member>
+        <member name="T:NBitcoin.IDestination">
+            <summary>
+            Represent any type which represent an underlying ScriptPubKey
+            </summary>
+        </member>
+        <member name="M:NBitcoin.BitcoinAddress.Create(System.String,NBitcoin.Network)">
+            <summary>
+            Detect whether the input base58 is a pubkey hash or a script hash
+            </summary>
+            <param name="base58">The Base58 string to parse</param>
+            <param name="expectedNetwork">The expected network to which it belongs</param>
+            <returns>A BitcoinAddress or BitcoinScriptAddress</returns>
+            <exception cref="T:System.FormatException">Invalid format</exception>
+        </member>
+        <member name="M:NBitcoin.BitcoinEncryptedSecretEC.HashAddress(NBitcoin.BitcoinAddress)">
+            <summary>
+            Take the first four bytes of SHA256(SHA256(generatedaddress)) and call it addresshash.
+            </summary>
+            <param name="address"></param>
+            <returns></returns>
+        </member>
+        <member name="T:NBitcoin.BitcoinExtKey">
+            <summary>
+            Base58 representation of an ExtKey
+            </summary>
+        </member>
+        <member name="T:NBitcoin.BitcoinExtPubKey">
+            <summary>
+            Base58 representation of an ExtPubKey
+            </summary>
+        </member>
+        <member name="T:NBitcoin.BitcoinPubKeyAddress">
+            <summary>
+            Base58 representation of a pubkey hash and base class for the representation of a script hash
+            </summary>
+        </member>
+        <member name="M:NBitcoin.FeeRate.GetFee(System.Int32)">
+            <summary>
+            Get fee for the size
+            </summary>
+            <param name="size">Size in bytes</param>
+            <returns></returns>
+        </member>
+        <member name="P:NBitcoin.FeeRate.FeePerK">
+            <summary>
+            Fee per KB
+            </summary>
+        </member>
+        <member name="T:NBitcoin.OpenAsset.NullColoredTransactionRepository">
+            <summary>
+            A colored transaction repository which does not save ColoredTransaction
+            </summary>
+        </member>
+        <member name="M:NBitcoin.Policy.ITransactionPolicy.Check(NBitcoin.Transaction,NBitcoin.ICoin[])">
+            <summary>
+            Check if the given transaction violate the policy
+            </summary>
+            <param name="transaction">The transaction</param>
+            <param name="spentCoins">The previous coins</param>
+            <returns>Policy errors</returns>
+        </member>
+        <member name="T:NBitcoin.Policy.NotEnoughFundsPolicyError">
+            <summary>
+            Error when not enough funds are present for verifying or building a transaction
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Policy.NotEnoughFundsPolicyError.Missing">
+            <summary>
+            Amount of Money missing
+            </summary>
+        </member>
+        <member name="M:NBitcoin.StealthCoin.Find(NBitcoin.Transaction,NBitcoin.Stealth.BitcoinStealthAddress,NBitcoin.Key)">
+            <summary>
+            Scan the Transaction for StealthCoin given address and scan key
+            </summary>
+            <param name="tx">The transaction to scan</param>
+            <param name="address">The stealth address</param>
+            <param name="scan">The scan private key</param>
+            <returns></returns>
+        </member>
+        <member name="T:NBitcoin.ConcurrentChain">
+            <summary>
+            Thread safe class representing a chain of headers from genesis
+            </summary>
+        </member>
+        <member name="M:NBitcoin.ChainBase.SetTip(NBitcoin.ChainedBlock)">
+            <summary>
+            Force a new tip for the chain
+            </summary>
+            <param name="pindex"></param>
+            <returns>forking point</returns>
+        </member>
+        <member name="M:NBitcoin.ConcurrentChain.SetTip(NBitcoin.ChainedBlock)">
+            <summary>
+            Force a new tip for the chain
+            </summary>
+            <param name="pindex"></param>
+            <returns>forking point</returns>
+        </member>
+        <member name="M:NBitcoin.OpenAsset.AssetMoney.Abs">
+            <summary>
+            Get absolute value of the instance
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.OpenAsset.AssetMoney.Split(System.Int32)">
+            <summary>
+            Split the Money in parts without loss
+            </summary>
+            <param name="parts">The number of parts (must be more than 0)</param>
+            <returns>The splitted money</returns>
+        </member>
+        <member name="P:NBitcoin.OpenAsset.AssetMoney.Id">
+            <summary>
+            AssetId of the current amount
+            </summary>
+        </member>
+        <member name="T:NBitcoin.OpenAsset.AssetId">
+            <summary>
+            A unique Id for an asset
+            </summary>
+        </member>
+        <member name="T:NBitcoin.OpenAsset.BitcoinAssetId">
+            <summary>
+            Base58 representation of an asset id
+            </summary>
+        </member>
+        <member name="T:NBitcoin.Payment.BitcoinUrlBuilder">
+            <summary>
+            https://github.com/bitcoin/bips/blob/master/bip-0021.mediawiki
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Payment.BitcoinUrlBuilder.PaymentRequestUrl">
+            <summary>
+            https://github.com/bitcoin/bips/blob/master/bip-0072.mediawiki
+            </summary>
+        </member>
+        <member name="M:NBitcoin.Payment.PaymentMessage.SubmitPayment(System.Uri)">
+            <summary>
+            Send the payment to given address
+            </summary>
+            <param name="paymentUrl">ImplicitPaymentUrl if null</param>
+            <returns>The PaymentACK</returns>
+        </member>
+        <member name="P:NBitcoin.Payment.PaymentDetails.Time">
+            <summary>
+            timestamp (seconds since 1-Jan-1970 UTC) when the PaymentRequest was created.
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Payment.PaymentDetails.Expires">
+            <summary>
+            timestamp (UTC) after which the PaymentRequest should be considered invalid. 
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Payment.PaymentDetails.Memo">
+            <summary>
+            plain-text (no formatting) note that should be displayed to the customer, explaining what this PaymentRequest is for. 
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Payment.PaymentDetails.PaymentUrl">
+            <summary>
+            Secure (usually https) location where a Payment message (see below) may be sent to obtain a PaymentACK. 
+            </summary>
+        </member>
+        <member name="M:NBitcoin.Payment.PaymentRequest.Verify">
+            <summary>
+            Verify that the certificate chain is trusted and signature correct.
+            </summary>
+            <returns>true if the certificate chain and the signature is trusted or if PKIType == None</returns>
+        </member>
+        <member name="P:NBitcoin.Payment.PaymentRequest.MerchantName">
+            <summary>
+            Get the merchant name from the certificate subject
+            </summary>
+        </member>
+        <member name="M:System.Web.NBitcoin.HttpUtility.HtmlDecode(System.String)">
+            <summary>
+            Decodes an HTML-encoded string and returns the decoded string.
+            </summary>
+            <param name="s">The HTML string to decode. </param>
+            <returns>The decoded text.</returns>
+        </member>
+        <member name="M:System.Web.NBitcoin.HttpUtility.HtmlDecode(System.String,System.IO.TextWriter)">
+            <summary>
+            Decodes an HTML-encoded string and sends the resulting output to a TextWriter output stream.
+            </summary>
+            <param name="s">The HTML string to decode</param>
+            <param name="output">The TextWriter output stream containing the decoded string. </param>
+        </member>
+        <member name="M:System.Web.NBitcoin.HttpUtility.HtmlEncode(System.String,System.IO.TextWriter)">
+            <summary>
+            HTML-encodes a string and sends the resulting output to a TextWriter output stream.
+            </summary>
+            <param name="s">The string to encode. </param>
+            <param name="output">The TextWriter output stream containing the encoded string. </param>
+        </member>
+        <member name="T:NBitcoin.Protocol.AddressManager">
+            <summary>
+            The AddressManager, keep a set of peers discovered on the network in cache can update their actual states.
+            Replicate AddressManager of Bitcoin Core, the Buckets and BucketPosition are not guaranteed to be coherent with Bitcoin Core
+            </summary>
+        </member>
+        <member name="M:NBitcoin.Protocol.AddressManager.Select">
+            <summary>
+            Choose an address to connect to.
+            </summary>
+            <returns>The network address of a peer, or null if none are found</returns>
+        </member>
+        <member name="M:NBitcoin.Protocol.AddressManager.GetAddr">
+            <summary>
+            Return a bunch of addresses, selected at random.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:NBitcoin.Protocol.Behaviors.AddressManagerBehavior">
+            <summary>
+            The AddressManagerBehavior class will respond to getaddr and register advertised nodes from addr messages to the AddressManager.
+            The AddressManagerBehavior will also receive feedback about connection attempt and success of discovered peers to the AddressManager, so it can be used later to find valid peer faster.
+            </summary>
+        </member>
+        <member name="M:NBitcoin.Protocol.Behaviors.BroadcastHub.BroadcastTransactionAsync(NBitcoin.Transaction)">
+            <summary>
+            Broadcast a transaction on the hub
+            </summary>
+            <param name="transaction">The transaction to broadcast</param>
+            <returns>The cause of the rejection or null</returns>
+        </member>
+        <member name="M:NBitcoin.ThreadSafeCollection`1.Add(`0)">
+            <summary>
+            Add an item to the collection
+            </summary>
+            <param name="item"></param>
+            <returns>When disposed, the item is removed</returns>
+        </member>
+        <member name="T:NBitcoin.Protocol.Behaviors.ChainBehavior">
+            <summary>
+            The Chain Behavior is responsible for keeping a ConcurrentChain up to date with the peer, it also responds to getheaders messages.
+            </summary>
+        </member>
+        <member name="M:NBitcoin.Protocol.Behaviors.ChainBehavior.TrySync">
+            <summary>
+            Asynchronously try to sync the chain
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Protocol.Behaviors.ChainBehavior.CanSync">
+            <summary>
+            Keep the chain in Sync (Default : true)
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Protocol.Behaviors.ChainBehavior.CanRespondToGetHeaders">
+            <summary>
+            Respond to getheaders messages (Default : true)
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Protocol.Behaviors.ChainBehavior.Synching">
+            <summary>
+            Using for test, this might not be reliable
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Protocol.Behaviors.ChainBehavior.AutoSync">
+            <summary>
+            Sync the chain as headers come from the network (Default : true)
+            </summary>
+        </member>
+        <member name="T:NBitcoin.Protocol.Filters.INodeFilter">
+            <summary>
+            A NodeFilter can intercept messages received and sent.
+            </summary>
+        </member>
+        <member name="M:NBitcoin.Protocol.Filters.INodeFilter.OnReceivingMessage(NBitcoin.Protocol.IncomingMessage,System.Action)">
+            <summary>
+            Intercept a message before it can be processed by listeners
+            </summary>
+            <param name="message">The message</param>
+            <param name="next">The rest of the pipeline</param>
+        </member>
+        <member name="M:NBitcoin.Protocol.Filters.INodeFilter.OnSendingMessage(NBitcoin.Protocol.Node,NBitcoin.Protocol.Payload,System.Action)">
+            <summary>
+            Intercept a message before it is sent to the peer
+            </summary>
+            <param name="node"></param>
+            <param name="payload"></param>
+            <param name="next">The rest of the pipeline</param>
+        </member>
+        <member name="T:NBitcoin.Protocol.Behaviors.NodesGroupBehavior">
+            <summary>
+            Maintain connection to a given set of nodes
+            </summary>
+        </member>
+        <member name="T:NBitcoin.Protocol.Behaviors.PingPongBehavior">
+            <summary>
+            The PingPongBehavior is responsible for firing ping message every PingInterval and responding with pong message, and close the connection if the Ping has not been completed after TimeoutInterval.
+            </summary>
+        </member>
+        <member name="M:NBitcoin.Protocol.Behaviors.PingPongBehavior.Probe">
+            <summary>
+            Send a ping asynchronously
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Protocol.Behaviors.PingPongBehavior.Mode">
+            <summary>
+            Whether the behavior send Ping and respond with Pong (Default : Both)
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Protocol.Behaviors.PingPongBehavior.TimeoutInterval">
+            <summary>
+            Interval after which an unresponded Ping will result in a disconnection. (Default : 20 minutes)
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Protocol.Behaviors.PingPongBehavior.PingInterval">
+            <summary>
+            Interval after which a Ping message is fired after the last received Pong (Default : 2 minutes)
+            </summary>
+        </member>
+        <member name="T:NBitcoin.RPC.RestClient">
+            <summary>
+            Client class for the unauthenticated REST Interface
+            </summary>
+        </member>
+        <member name="M:NBitcoin.RPC.RestClient.#ctor(System.Uri)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NBitcoin.RPC.RestClient"/> class.
+            </summary>
+            <param name="serviceEndpoint">The rest API endpoint.</param>
+        </member>
+        <member name="M:NBitcoin.RPC.RestClient.#ctor(System.Uri,NBitcoin.RPC.RestResponseFormat)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NBitcoin.RPC.RestClient"/> class.
+            </summary>
+            <param name="address">The rest API endpoint</param>
+            <param name="format">The format (bin | hex | json).</param>
+            <exception cref="T:System.ArgumentNullException">Null rest API endpoint</exception>
+            <exception cref="T:System.ArgumentException">Invalid value for RestResponseFormat</exception>
+        </member>
+        <member name="M:NBitcoin.RPC.RestClient.GetBlockAsync(NBitcoin.uint256)">
+            <summary>
+            Gets the block.
+            </summary>
+            <param name="blockId">The block identifier.</param>
+            <returns>Given a block hash (id) returns the requested block object.</returns>
+            <exception cref="T:System.ArgumentNullException">blockId cannot be null.</exception>
+        </member>
+        <member name="M:NBitcoin.RPC.RestClient.GetBlock(NBitcoin.uint256)">
+            <summary>
+            Gets the block.
+            </summary>
+            <param name="blockId">The block identifier.</param>
+            <returns>Given a block hash (id) returns the requested block object.</returns>
+            <exception cref="T:System.ArgumentNullException">blockId cannot be null.</exception>
+        </member>
+        <member name="M:NBitcoin.RPC.RestClient.GetTransactionAsync(NBitcoin.uint256)">
+            <summary>
+            Gets a transaction.
+            </summary>
+            <param name="txId">The transaction identifier.</param>
+            <returns>Given a transaction hash (id) returns the requested transaction object.</returns>
+            <exception cref="T:System.ArgumentNullException">txId cannot be null</exception>
+        </member>
+        <member name="M:NBitcoin.RPC.RestClient.GetTransaction(NBitcoin.uint256)">
+            <summary>
+            Gets a transaction.
+            </summary>
+            <param name="txId">The transaction identifier.</param>
+            <returns>Given a transaction hash (id) returns the requested transaction object.</returns>
+            <exception cref="T:System.ArgumentNullException">txId cannot be null</exception>
+        </member>
+        <member name="M:NBitcoin.RPC.RestClient.GetBlockHeadersAsync(NBitcoin.uint256,System.Int32)">
+            <summary>
+            Gets blocks headers.
+            </summary>
+            <param name="blockId">The initial block identifier.</param>
+            <param name="count">how many headers to get.</param>
+            <returns>Given a block hash (blockId) returns as much block headers as specified.</returns>
+            <exception cref="T:System.ArgumentNullException">blockId cannot be null</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">count must be greater or equal to one.</exception>
+        </member>
+        <member name="M:NBitcoin.RPC.RestClient.GetBlockHeaders(NBitcoin.uint256,System.Int32)">
+            <summary>
+            Gets blocks headers.
+            </summary>
+            <param name="blockId">The initial block identifier.</param>
+            <param name="count">how many headers to get.</param>
+            <returns>Given a block hash (blockId) returns as much block headers as specified.</returns>
+            <exception cref="T:System.ArgumentNullException">blockId cannot be null</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">count must be greater or equal to one.</exception>
+        </member>
+        <member name="M:NBitcoin.RPC.RestClient.GetChainInfoAsync">
+            <summary>
+            Gets the chain information.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.RPC.RestClient.GetUnspentOutputsAsync(System.Collections.Generic.IEnumerable{NBitcoin.OutPoint},System.Boolean)">
+            <summary>
+            Gets unspect outputs.
+            </summary>
+            <param name="outPoints">The out points identifiers (TxIn-N).</param>
+            <param name="checkMempool">if set to <c>true</c> [check mempool].</param>
+            <returns>The unspent transaction outputs (UTXO) for the given outPoints.</returns>
+            <exception cref="T:System.ArgumentNullException">outPoints cannot be null.</exception>
+        </member>
+        <member name="P:NBitcoin.Policy.StandardTransactionPolicy.MaxTxFee">
+            <summary>
+            Safety check, if the FeeRate exceed this value, a policy error is raised
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Policy.StandardTransactionPolicy.CheckScriptPubKey">
+            <summary>
+            Check the standardness of scriptPubKey
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Protocol.NodeConnectionParameters.Advertize">
+            <summary>
+            Send addr unsollicited message of the AddressFrom peer when passing to Handshaked state
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Protocol.NodeConnectionParameters.IsRelay">
+            <summary>
+            If true, the node will receive all incoming transactions if no bloomfilter are set
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Protocol.NodeConnectionParameters.IsTrusted">
+            <summary>
+            If true, then no proof of work is checked on incoming headers, if null, will trust localhost
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Protocol.NodeConnectionParameters.ReuseBuffer">
+            <summary>
+            Whether we reuse a 1MB buffer for deserializing messages, for limiting GC activity (Default : true)
+            </summary>
+        </member>
+        <member name="M:NBitcoin.Protocol.NodesGroup.Connect">
+            <summary>
+            Start connecting asynchronously to remote peers
+            </summary>
+        </member>
+        <member name="M:NBitcoin.Protocol.NodesGroup.Disconnect">
+            <summary>
+            Drop connection to all connected nodes
+            </summary>
+        </member>
+        <member name="M:NBitcoin.Protocol.NodesGroup.Purge(System.String)">
+            <summary>
+            Asynchronously create a new set of nodes
+            </summary>
+        </member>
+        <member name="M:NBitcoin.Protocol.NodesGroup.Dispose">
+            <summary>
+            Same as Disconnect
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Protocol.NodesGroup.MaximumNodeConnection">
+            <summary>
+            The number of node that this behavior will try to maintain online (Default : 8)
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Protocol.NodesGroup.AllowSameGroup">
+            <summary>
+            If false, the search process will do its best to connect to Node in different network group to prevent sybil attacks (Default : false)
+            </summary>
+        </member>
+        <member name="T:NBitcoin.Protocol.FilterLoadPayload">
+            <summary>
+            Load a bloomfilter in the peer, used by SPV clients
+            </summary>
+        </member>
+        <member name="T:NBitcoin.Protocol.GetBlocksPayload">
+            <summary>
+            Ask for the block hashes (inv) that happened since BlockLocators
+            </summary>
+        </member>
+        <member name="T:NBitcoin.Protocol.GetDataPayload">
+            <summary>
+            Ask for transaction, block or merkle block
+            </summary>
+        </member>
+        <member name="T:NBitcoin.Protocol.MempoolPayload">
+            <summary>
+            Ask for the mempool, followed by inv messages
+            </summary>
+        </member>
+        <member name="T:NBitcoin.Protocol.MerkleBlockPayload">
+            <summary>
+            A merkle block received after being asked with a getdata message
+            </summary>
+        </member>
+        <member name="T:NBitcoin.Protocol.NotFoundPayload">
+            <summary>
+            A getdata message for an asked hash is not found by the remote peer
+            </summary>
+        </member>
+        <member name="T:NBitcoin.Protocol.RejectPayload">
+            <summary>
+            A transaction or block are rejected being transmitted through tx or block messages
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Protocol.RejectPayload.Message">
+            <summary>
+            "tx" or "block"
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Protocol.RejectPayload.Reason">
+            <summary>
+            Details of the error
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Protocol.RejectPayload.Hash">
+            <summary>
+            The hash being rejected
+            </summary>
+        </member>
+        <member name="M:NBitcoin.QBitNinjaTransactionRepository.#ctor(NBitcoin.Network)">
+            <summary>
+            Use qbitninja public servers
+            </summary>
+            <param name="network"></param>
+        </member>
+        <member name="M:NBitcoin.RPC.RPCClient.SendCommand(System.String,System.Object[])">
+            <summary>
+            Send a command
+            </summary>
+            <param name="commandName">https://en.bitcoin.it/wiki/Original_Bitcoin_client/API_calls_list</param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.RPC.RPCClient.GetBlockAsync(NBitcoin.uint256)">
+            <summary>
+            Get the a whole block
+            </summary>
+            <param name="blockId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.RPC.RPCClient.GetBlock(NBitcoin.uint256)">
+            <summary>
+            Get the a whole block
+            </summary>
+            <param name="blockId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.RPC.RPCClient.GetRawTransaction(NBitcoin.uint256,System.Boolean)">
+            <summary>
+            getrawtransaction only returns on txn which are not entirely spent unless you run bitcoinq with txindex=1.
+            </summary>
+            <param name="txid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.RPC.RPCClient.GetTransactions(NBitcoin.uint256)">
+            <summary>
+            GetTransactions only returns on txn which are not entirely spent unless you run bitcoinq with txindex=1.
+            </summary>
+            <param name="blockHash"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.RPC.RPCClient.EstimateFee(System.Int32)">
+            <summary>
+            Get the estimated fee per kb for being confirmed in nblock
+            </summary>
+            <param name="nblock"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.RPC.RPCClient.EstimateFeeAsync(System.Int32)">
+            <summary>
+            Get the estimated fee per kb for being confirmed in nblock
+            </summary>
+            <param name="nblock"></param>
+            <returns></returns>
+        </member>
+        <member name="T:NBitcoin.SPV.Tracker">
+            <summary>
+            Idempotent and thread safe for tracking operations belonging to a set of ScriptPubKeys
+            </summary>
+        </member>
+        <member name="M:NBitcoin.SPV.Tracker.Add(NBitcoin.IDestination,System.Boolean,System.Boolean,System.String,System.String)">
+            <summary>
+            Register the specified ScriptPubKey
+            </summary>
+            <param name="destination">The destination</param>
+            <param name="isRedeemScript">If true, the P2SH of the destination's script will be tracked (Default: false)</param>
+            <param name="isInternal">If true, the scriptPubKey will not belong to tracked data, typically, change addresses (Default: false)</param>
+            <param name="filter">The filter in which this key will appear (http://eprint.iacr.org/2014/763.pdf)</param>
+            <param name="wallet">The wallet name to which it belongs</param>
+        </member>
+        <member name="M:NBitcoin.SPV.Tracker.Add(NBitcoin.Script,System.Boolean,System.Boolean,System.String,System.String)">
+            <summary>
+            Register the specified ScriptPubKey
+            </summary>
+            <param name="scriptPubKey">The ScriptPubKey</param>
+            <param name="isRedeemScript">If true, the P2SH of the destination's script will be tracked (Default: false)</param>
+            <param name="isInternal">If true, the scriptPubKey will not belong to tracked data, typically, change addresses (Default: false)</param>
+            <param name="filter">The filter in which this key will appear (http://eprint.iacr.org/2014/763.pdf)</param>
+            <param name="wallet">The wallet name to which it belongs</param>
+        </member>
+        <!-- Commentaire XML incorrect ignoré pour le membre "M:NBitcoin.SPV.Tracker.Prune(NBitcoin.ConcurrentChain,System.Int32,System.Nullable{System.TimeSpan})" -->
+        <member name="M:NBitcoin.SPV.Tracker.Validate">
+            <summary>
+            Check internal consistency
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:NBitcoin.SPV.TrackerBehavior">
+            <summary>
+            Load a bloom filter on the node, and push transactions in the Tracker
+            </summary>
+        </member>
+        <member name="M:NBitcoin.SPV.TrackerBehavior.#ctor(NBitcoin.SPV.Tracker,NBitcoin.ConcurrentChain)">
+            <summary>
+            Create a new TrackerBehavior instance
+            </summary>
+            <param name="tracker">The Tracker registering transactions and confirmations</param>
+            <param name="chain">The chain used to fetch height of incoming blocks, if null, use the chain of ChainBehavior</param>
+        </member>
+        <member name="M:NBitcoin.SPV.TrackerBehavior.Scan(NBitcoin.BlockLocator,System.DateTimeOffset)">
+            <summary>
+            Start a scan, if a scan is already running, will change only if the parameters are anterior
+            </summary>
+            <param name="locator"></param>
+        </member>
+        <member name="M:NBitcoin.SPV.TrackerBehavior.RefreshBloomFilter">
+            <summary>
+            Refresh the bloom filter
+            </summary>
+        </member>
+        <member name="M:NBitcoin.SPV.TrackerBehavior.SendMessageAsync(NBitcoin.Protocol.Payload)">
+            <summary>
+            Send message once the bloom filter is set
+            </summary>
+            <param name="payload">Message to send</param>
+        </member>
+        <member name="P:NBitcoin.SPV.TrackerBehavior.FalsePositiveRate">
+            <summary>
+            The expected false positive rate (between 1.0 and 0)
+            </summary>
+        </member>
+        <member name="P:NBitcoin.SPV.TrackerBehavior.MaximumFalsePositiveRateDifference">
+            <summary>
+            The maximum accepted false positive rate difference, the node will be disconnected if the actual false positive rate is higher than FalsePositiveRate + MaximumFalsePositiveRateDifference.
+            </summary>
+        </member>
+        <member name="M:NBitcoin.SPV.WalletCreation.#ctor(NBitcoin.BitcoinExtPubKey)">
+            <summary>
+            Create a P2PKH wallet with one key
+            </summary>
+            <param name="rootKey">The master key to use</param>
+        </member>
+        <member name="T:NBitcoin.SPV.Wallet">
+            <summary>
+            A SPV Wallet respecting recommendation for privacy http://eprint.iacr.org/2014/763.pdf
+            </summary>
+        </member>
+        <member name="M:NBitcoin.SPV.Wallet.#ctor(NBitcoin.SPV.WalletCreation,System.Int32)">
+            <summary>
+            Create a new wallet
+            </summary>
+            <param name="creation">Creation parameters</param>
+            <param name="keyPoolSize">The number of keys which will be pre-created</param>
+        </member>
+        <member name="M:NBitcoin.SPV.Wallet.#ctor(NBitcoin.BitcoinExtPubKey,System.Int32)">
+            <summary>
+            Create a new wallet P2PKH with one key
+            </summary>
+            <param name="rootKey"></param>
+            <param name="keyPoolSize"></param>
+        </member>
+        <member name="M:NBitcoin.SPV.Wallet.GetKeyPath(NBitcoin.Script)">
+            <summary>
+            Get the KeyPath of the given scriptPubKey
+            </summary>
+            <param name="scriptPubKey">ScriptPubKey</param>
+            <returns>The key path to the scriptPubKey</returns>
+        </member>
+        <member name="M:NBitcoin.SPV.Wallet.Configure(NBitcoin.ConcurrentChain,NBitcoin.Protocol.AddressManager,NBitcoin.SPV.Tracker)">
+            <summary>
+            Configure the components of the wallet
+            </summary>
+            <param name="chain">The chain to keep in sync, if not provided the whole chain will be downloaded on the network (more than 30MB)</param>
+            <param name="addrman">The Address Manager for speeding up peer discovery</param>
+            <param name="tracker">The tracker responsible for providing bloom filters</param>
+        </member>
+        <member name="M:NBitcoin.SPV.Wallet.Configure(NBitcoin.Protocol.NodeConnectionParameters)">
+            <summary>
+            Configure the components of the wallet
+            </summary>
+            <param name="parameters">The parameters to the connection</param>
+        </member>
+        <member name="M:NBitcoin.SPV.Wallet.Configure(NBitcoin.Protocol.NodesGroup)">
+            <summary>
+            Configure the components of the wallet
+            </summary>
+            <param name="group">The group to use</param>
+        </member>
+        <member name="M:NBitcoin.SPV.Wallet.Connect">
+            <summary>
+            Start the connection to the NodeGroup
+            </summary>
+        </member>
+        <member name="M:NBitcoin.SPV.Wallet.BroadcastTransactionAsync(NBitcoin.Transaction)">
+            <summary>
+            Broadcast a transaction, if the same template behavior as been used for other nodes, they will also broadcast
+            </summary>
+            <param name="transaction">The transaction to broadcast</param>
+            <returns>The cause of the rejection or null</returns>
+        </member>
+        <member name="E:NBitcoin.SPV.Wallet.NewWalletTransaction">
+            <summary>
+            Get incoming transactions of the wallet, subscribers should not make any blocking call
+            </summary>
+        </member>
+        <member name="P:NBitcoin.SPV.Wallet.Created">
+            <summary>
+            Blocks below this date will not be processed
+            </summary>
+        </member>
+        <member name="M:NBitcoin.Stealth.BitcoinStealthAddress.GetPayments(NBitcoin.Transaction,NBitcoin.Key)">
+            <summary>
+            Scan the Transaction for StealthCoin given address and scan key
+            </summary>
+            <param name="tx">The transaction to scan</param>
+            <param name="address">The stealth address</param>
+            <param name="scan">The scan private key</param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.Stealth.BitcoinStealthAddress.GetPayments(NBitcoin.Transaction,NBitcoin.ISecret)">
+            <summary>
+            Scan the Transaction for StealthCoin given address and scan key
+            </summary>
+            <param name="tx">The transaction to scan</param>
+            <param name="address">The stealth address</param>
+            <param name="scan">The scan private key</param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.Stealth.BitcoinStealthAddress.CreatePayment(NBitcoin.Key)">
+            <summary>
+            Prepare a stealth payment 
+            </summary>
+            <param name="ephemKey">Ephem Key</param>
+            <returns>Stealth Payment</returns>
+        </member>
+        <member name="M:NBitcoin.Stealth.BitcoinStealthAddress.SendTo(NBitcoin.Transaction,NBitcoin.Money,NBitcoin.Key)">
+            <summary>
+            Add a stealth payment to the transaction
+            </summary>
+            <param name="transaction">Destination transaction</param>
+            <param name="value">Money to send</param>
+            <param name="ephemKey">Ephem Key</param>
+        </member>
+        <member name="T:NBitcoin.BlockHeader">
+            Nodes collect new transactions into a block, hash them into a hash tree,
+            and scan through nonce values to make the block's hash satisfy proof-of-work
+            requirements.  When they solve the proof-of-work, they broadcast the block
+            to everyone and the block is added to the block chain.  The first transaction
+            in the block is a special one that creates a new coin owned by the creator
+            of the block.
+        </member>
+        <member name="M:NBitcoin.Block.Check">
+            <summary>
+            Check proof of work and merkle root
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:NBitcoin.ChainedBlock">
+            <summary>
+            A BlockHeader chained with all its ancestors
+            </summary>
+        </member>
+        <member name="T:NBitcoin.BlockLocator">
+            <summary>
+            Compact representation of one's chain position which can be used to find forks with another chain
+            </summary>
+        </member>
+        <member name="M:NBitcoin.BitcoinCore.BlockStore.Enumerate(System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="headersOnly"></param>
+            <param name="blockStart">Inclusive block count</param>
+            <param name="blockEnd">Exclusive block count</param>
+            <returns></returns>
+        </member>
+        <member name="T:NBitcoin.BitcoinCore.TxInUndo">
+            Undo information for a CTxIn
+            
+              Contains the prevout's CTxOut being spent, and if this was the
+              last output of the affected transaction, its metadata as well
+              (coinbase or not, height, transaction version)
+        </member>
+        <member name="T:NBitcoin.BloomFilter">
+            <summary>
+            Used by SPV client, represent the set of interesting addresses tracked by SPV client with plausible deniability
+            </summary>
+        </member>
+        <member name="T:NBitcoin.Crypto.Pbkdf2">
+             <summary>
+             Implements the PBKDF2 key derivation function.
+             </summary>
+             
+             <example>
+             <code title="Computing a Derived Key">
+             using System.Security.Cryptography;
+             using CryptSharp.Utility;
+             
+             // Compute a 128-byte derived key using HMAC-SHA256, 1000 iterations, and a given key and salt.
+             byte[] derivedKey = Pbkdf2.ComputeDerivedKey(new HMACSHA256(key), salt, 1000, 128);
+             </code>
+             <code title="Creating a Derived Key Stream">
+             using System.IO;
+             using System.Security.Cryptography;
+             using CryptSharp.Utility;
+            
+             // Create a stream using HMAC-SHA512, 1000 iterations, and a given key and salt.
+             Stream derivedKeyStream = new Pbkdf2(new HMACSHA512(key), salt, 1000);
+             </code>
+             </example>
+        </member>
+        <member name="M:NBitcoin.Crypto.Pbkdf2.#ctor(System.Security.Cryptography.KeyedHashAlgorithm,System.Byte[],System.Int32)">
+            <summary>
+            Creates a new PBKDF2 stream.
+            </summary>
+            <param name="hmacAlgorithm">
+                The HMAC algorithm to use, for example <see cref="T:System.Security.Cryptography.HMACSHA256"/>.
+                Make sure to set <see cref="P:System.Security.Cryptography.KeyedHashAlgorithm.Key"/>.
+            </param>
+            <param name="salt">
+                The salt.
+                A unique salt means a unique PBKDF2 stream, even if the original key is identical.
+            </param>
+            <param name="iterations">The number of iterations to apply.</param>
+        </member>
+        <member name="M:NBitcoin.Crypto.Pbkdf2.Read(System.Int32)">
+            <summary>
+            Reads from the derived key stream.
+            </summary>
+            <param name="count">The number of bytes to read.</param>
+            <returns>Bytes from the derived key stream.</returns>
+        </member>
+        <member name="M:NBitcoin.Crypto.Pbkdf2.ComputeDerivedKey(System.Security.Cryptography.KeyedHashAlgorithm,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Computes a derived key.
+            </summary>
+            <param name="hmacAlgorithm">
+                The HMAC algorithm to use, for example <see cref="T:System.Security.Cryptography.HMACSHA256"/>.
+                Make sure to set <see cref="P:System.Security.Cryptography.KeyedHashAlgorithm.Key"/>.
+            </param>
+            <param name="salt">
+                The salt.
+                A unique salt means a unique derived key, even if the original key is identical.
+            </param>
+            <param name="iterations">The number of iterations to apply.</param>
+            <param name="derivedKeyLength">The desired length of the derived key.</param>
+            <returns>The derived key.</returns>
+        </member>
+        <member name="M:NBitcoin.Crypto.Pbkdf2.Close">
+            <summary>
+            Closes the stream, clearing memory and disposing of the HMAC algorithm.
+            </summary>
+        </member>
+        <member name="M:NBitcoin.Crypto.Pbkdf2.Flush">
+            <exclude />
+        </member>
+        <member name="M:NBitcoin.Crypto.Pbkdf2.Read(System.Byte[],System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:NBitcoin.Crypto.Pbkdf2.Seek(System.Int64,System.IO.SeekOrigin)">
+            <inheritdoc />
+        </member>
+        <member name="M:NBitcoin.Crypto.Pbkdf2.SetLength(System.Int64)">
+            <exclude />
+        </member>
+        <member name="M:NBitcoin.Crypto.Pbkdf2.Write(System.Byte[],System.Int32,System.Int32)">
+            <exclude />
+        </member>
+        <member name="P:NBitcoin.Crypto.Pbkdf2.CanRead">
+            <exclude />
+        </member>
+        <member name="P:NBitcoin.Crypto.Pbkdf2.CanSeek">
+            <exclude />
+        </member>
+        <member name="P:NBitcoin.Crypto.Pbkdf2.CanWrite">
+            <exclude />
+        </member>
+        <member name="P:NBitcoin.Crypto.Pbkdf2.Length">
+            <summary>
+            The maximum number of bytes that can be derived is 2^32-1 times the HMAC size.
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Crypto.Pbkdf2.Position">
+            <summary>
+            The position within the derived key stream.
+            </summary>
+        </member>
+        <member name="T:NBitcoin.Crypto.Salsa20Core">
+            <summary>
+            Implements the Salsa20 hash function.
+            </summary>
+        </member>
+        <member name="M:NBitcoin.Crypto.Salsa20Core.Compute(System.Int32,System.UInt32[],System.Int32,System.UInt32[],System.Int32)">
+            <summary>
+            Applies the Salsa20 hash function.
+            It maps a 16 element input to an output of the same size.
+            </summary>
+            <param name="rounds">The number of rounds. SCrypt uses 8.</param>
+            <param name="input">The input buffer.</param>
+            <param name="inputOffset">The offset into the input buffer.</param>
+            <param name="output">The output buffer.</param>
+            <param name="outputOffset">The offset into the output buffer.</param>
+        </member>
+        <member name="T:NBitcoin.Crypto.SCrypt">
+            <summary>
+            Implements the SCrypt key derivation function.
+            </summary>
+        </member>
+        <member name="M:NBitcoin.Crypto.SCrypt.ComputeDerivedKey(System.Byte[],System.Byte[],System.Int32,System.Int32,System.Int32,System.Nullable{System.Int32},System.Int32)">
+            <summary>
+            Computes a derived key.
+            </summary>
+            <param name="key">The key to derive from.</param>
+            <param name="salt">
+                The salt.
+                A unique salt means a unique SCrypt stream, even if the original key is identical.
+            </param>
+            <param name="cost">
+                The cost parameter, typically a fairly large number such as 262144.
+                Memory usage and CPU time scale approximately linearly with this parameter.
+            </param>
+            <param name="blockSize">
+                The mixing block size, typically 8.
+                Memory usage and CPU time scale approximately linearly with this parameter.
+            </param>
+            <param name="parallel">
+                The level of parallelism, typically 1.
+                CPU time scales approximately linearly with this parameter.
+            </param>
+            <param name="maxThreads">
+                The maximum number of threads to spawn to derive the key.
+                This is limited by the <paramref name="parallel"/> value.
+                <c>null</c> will use as many threads as possible.
+            </param>
+            <param name="derivedKeyLength">The desired length of the derived key.</param>
+            <returns>The derived key.</returns>
+        </member>
+        <member name="M:NBitcoin.Crypto.SCrypt.GetEffectivePbkdf2Salt(System.Byte[],System.Byte[],System.Int32,System.Int32,System.Int32,System.Nullable{System.Int32})">
+            <summary>
+            The SCrypt algorithm creates a salt which it then uses as a one-iteration
+            PBKDF2 key stream with SHA256 HMAC. This method lets you retrieve this intermediate salt.
+            </summary>
+            <param name="key">The key to derive from.</param>
+            <param name="salt">
+                The salt.
+                A unique salt means a unique SCrypt stream, even if the original key is identical.
+            </param>
+            <param name="cost">
+                The cost parameter, typically a fairly large number such as 262144.
+                Memory usage and CPU time scale approximately linearly with this parameter.
+            </param>
+            <param name="blockSize">
+                The mixing block size, typically 8.
+                Memory usage and CPU time scale approximately linearly with this parameter.
+            </param>
+            <param name="parallel">
+                The level of parallelism, typically 1.
+                CPU time scales approximately linearly with this parameter.
+            </param>
+            <param name="maxThreads">
+                The maximum number of threads to spawn to derive the key.
+                This is limited by the <paramref name="parallel"/> value.
+                <c>null</c> will use as many threads as possible.
+            </param>
+            <returns>The effective salt.</returns>
+        </member>
+        <member name="M:NBitcoin.Crypto.SCrypt.GetStream(System.Byte[],System.Byte[],System.Int32,System.Int32,System.Int32,System.Nullable{System.Int32})">
+            <summary>
+            Creates a derived key stream from which a derived key can be read.
+            </summary>
+            <param name="key">The key to derive from.</param>
+            <param name="salt">
+                The salt.
+                A unique salt means a unique scrypt stream, even if the original key is identical.
+            </param>
+            <param name="cost">
+                The cost parameter, typically a fairly large number such as 262144.
+                Memory usage and CPU time scale approximately linearly with this parameter.
+            </param>
+            <param name="blockSize">
+                The mixing block size, typically 8.
+                Memory usage and CPU time scale approximately linearly with this parameter.
+            </param>
+            <param name="parallel">
+                The level of parallelism, typically 1.
+                CPU time scales approximately linearly with this parameter.
+            </param>
+            <param name="maxThreads">
+                The maximum number of threads to spawn to derive the key.
+                This is limited by the <paramref name="parallel"/> value.
+                <c>null</c> will use as many threads as possible.
+            </param>
+            <returns>The derived key stream.</returns>
+        </member>
+        <member name="T:NBitcoin.ExtKey">
+            <summary>
+            A private HD key
+            </summary>
+        </member>
+        <member name="M:NBitcoin.ExtKey.Neuter">
+            <summary>
+            Create the public key from this key
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:NBitcoin.ExtPubKey">
+            <summary>
+            A public HD key
+            </summary>
+        </member>
+        <member name="P:NBitcoin.ExtPubKey.ScriptPubKey">
+            <summary>
+            The P2PKH payment script
+            </summary>
+        </member>
+        <member name="T:NBitcoin.Protocol.BlockPayload">
+            <summary>
+            A block received after being asked with a getdata message
+            </summary>
+        </member>
+        <member name="T:NBitcoin.Protocol.GetHeadersPayload">
+            <summary>
+            Ask block headers that happened since BlockLocators
+            </summary>
+        </member>
+        <member name="T:NBitcoin.Protocol.HeadersPayload">
+            <summary>
+            Block headers received after a getheaders messages
+            </summary>
+        </member>
+        <member name="T:NBitcoin.Protocol.GetAddrPayload">
+            <summary>
+            Ask for known peer addresses in the network
+            </summary>
+        </member>
+        <member name="M:NBitcoin.Network.CreateBitcoinAddress(System.String)">
+            <summary>
+            Create a bitcoin address from base58 data, return a BitcoinAddress or BitcoinScriptAddress
+            </summary>
+            <param name="base58">base58 address</param>
+            <exception cref="T:System.FormatException">Invalid base58 address</exception>
+            <returns>BitcoinScriptAddress, BitcoinAddress</returns>
+        </member>
+        <member name="M:NBitcoin.Network.CreateFromBase58Data(System.String,NBitcoin.Network)">
+            <summary>
+            Find automatically the data type and the network to which belong the base58 data
+            </summary>
+            <param name="base58">base58 data</param>
+            <exception cref="T:System.FormatException">Invalid base58 data</exception>
+        </member>
+        <member name="M:NBitcoin.Network.GetNetwork(System.UInt32)">
+            <summary>
+            Get network from protocol magic number
+            </summary>
+            <param name="magic">Magic number</param>
+            <returns>The network, or null of the magic number does not match any network</returns>
+        </member>
+        <member name="M:NBitcoin.Network.GetNetwork(System.String)">
+            <summary>
+            Get network from name
+            </summary>
+            <param name="name">main,mainnet,testnet,test,testnet3,reg,regtest,seg,segnet</param>
+            <returns>The network or null of the name does not match any network</returns>
+        </member>
+        <member name="T:NBitcoin.Protocol.AddrPayload">
+            <summary>
+            An available peer address in the bitcoin network is announce (unsollicited or after a getaddr)
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Protocol.AlertPayload.Now">
+            <summary>
+            Used for knowing if an alert is valid in past of future
+            </summary>
+        </member>
+        <member name="T:NBitcoin.Protocol.InvPayload">
+            <summary>
+            Announce the hash of a transaction or block
+            </summary>
+        </member>
+        <member name="F:NBitcoin.Protocol.Message._SkipMagic">
+            <summary>
+            When parsing, maybe Magic is already parsed
+            </summary>
+        </member>
+        <member name="M:NBitcoin.Protocol.Node.Connect(NBitcoin.Network,NBitcoin.Protocol.AddressManager,NBitcoin.Protocol.NodeConnectionParameters,System.Net.IPAddress[])">
+            <summary>
+            Connect to a random node on the network
+            </summary>
+            <param name="network">The network to connect to</param>
+            <param name="addrman">The addrman used for finding peers</param>
+            <param name="parameters">The parameters used by the found node</param>
+            <param name="connectedAddresses">The already connected addresses, the new address will be select outside of existing groups</param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.Protocol.Node.Connect(NBitcoin.Network,NBitcoin.Protocol.NodeConnectionParameters,System.Net.IPAddress[])">
+            <summary>
+            Connect to a random node on the network
+            </summary>
+            <param name="network">The network to connect to</param>
+            <param name="parameters">The parameters used by the found node, use AddressManagerBehavior.GetAddrman for finding peers</param>
+            <param name="connectedAddresses">The already connected addresses, the new address will be select outside of existing groups</param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.Protocol.Node.ConnectToLocal(NBitcoin.Network,NBitcoin.Protocol.NodeConnectionParameters)">
+            <summary>
+            Connect to the node of this machine
+            </summary>
+            <param name="network"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.Protocol.Node.SendMessageAsync(NBitcoin.Protocol.Payload)">
+            <summary>
+            Send a message to the peer asynchronously
+            </summary>
+            <param name="payload">The payload to send</param>
+            <param name="System.OperationCanceledException">The node has been disconnected</param>
+        </member>
+        <member name="M:NBitcoin.Protocol.Node.SendMessage(NBitcoin.Protocol.Payload,System.Threading.CancellationToken)">
+            <summary>
+            Send a message to the peer synchronously
+            </summary>
+            <param name="payload">The payload to send</param>
+            <exception cref="T:System.ArgumentNullException">Payload is null</exception>
+            <param name="System.OperationCanceledException">The node has been disconnected, or the cancellation token has been set to canceled</param>
+        </member>
+        <member name="M:NBitcoin.Protocol.Node.RespondToHandShake(System.Threading.CancellationToken)">
+            <summary>
+            
+            </summary>
+            <param name="cancellation"></param>
+        </member>
+        <member name="M:NBitcoin.Protocol.Node.GetChain(NBitcoin.uint256,System.Threading.CancellationToken)">
+            <summary>
+            Get the chain of headers from the peer (thread safe)
+            </summary>
+            <param name="hashStop">The highest block wanted</param>
+            <param name="cancellationToken"></param>
+            <returns>The chain of headers</returns>
+        </member>
+        <member name="M:NBitcoin.Protocol.Node.SynchronizeChain(NBitcoin.ChainBase,NBitcoin.uint256,System.Threading.CancellationToken)">
+            <summary>
+            Synchronize a given Chain to the tip of this node if its height is higher. (Thread safe)
+            </summary>
+            <param name="chain">The chain to synchronize</param>
+            <param name="hashStop">The location until which it synchronize</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.Protocol.Node.CreateListener">
+            <summary>
+            Create a listener that will queue messages until diposed
+            </summary>
+            <returns>The listener</returns>
+            <exception cref="T:System.InvalidOperationException">Thrown if used on the listener's thread, as it would result in a deadlock</exception>
+        </member>
+        <member name="M:NBitcoin.Protocol.Node.GetMempoolTransactions(System.Threading.CancellationToken)">
+            <summary>
+            Retrieve transactions from the mempool
+            </summary>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>Transactions in the mempool</returns>
+        </member>
+        <member name="M:NBitcoin.Protocol.Node.GetMempoolTransactions(NBitcoin.uint256[],System.Threading.CancellationToken)">
+            <summary>
+            Retrieve transactions from the mempool by ids
+            </summary>
+            <param name="txIds">Transaction ids to retrieve</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>The transactions, if a transaction is not found, then it is not returned in the array.</returns>
+        </member>
+        <member name="M:NBitcoin.Protocol.Node.AddSupportedOptions(NBitcoin.Protocol.InventoryType)">
+            <summary>
+            Add supported option to the input inventory type
+            </summary>
+            <param name="inventoryType">Inventory type (like MSG_TX)</param>
+            <returns>Inventory type with options (MSG_TX | MSG_WITNESS_FLAG)</returns>
+        </member>
+        <member name="M:NBitcoin.Protocol.Node.PingPong(System.Threading.CancellationToken)">
+            <summary>
+            Emit a ping and wait the pong
+            </summary>
+            <param name="cancellation"></param>
+            <returns>Latency</returns>
+        </member>
+        <member name="P:NBitcoin.Protocol.Node.Version">
+            <summary>
+            The negociated protocol version (minimum of supported version between MyVersion and the PeerVersion)
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Protocol.Node.Advertize">
+            <summary>
+            Send addr unsollicited message of the AddressFrom peer when passing to Handshaked state
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Protocol.Node.PreferredTransactionOptions">
+            <summary>
+            Transaction options we would like
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Protocol.Node.SupportedTransactionOptions">
+            <summary>
+            Transaction options supported by the peer
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Protocol.Node.ActualTransactionOptions">
+            <summary>
+            Transaction options we prefer and which is also supported by peer
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Protocol.Node.IsTrusted">
+            <summary>
+            Will verify proof of work during chain operations
+            </summary>
+        </member>
+        <member name="P:NBitcoin.Protocol.NodeServer.InboundNodeConnectionParameters">
+            <summary>
+            The parameters that will be cloned and applied for each node connecting to the NodeServer
+            </summary>
+        </member>
+        <member name="T:NBitcoin.Protocol.TxPayload">
+            <summary>
+            Represents a transaction being sent on the network, is sent after being requested by a getdata (of Transaction or MerkleBlock) message.
+            </summary>
+        </member>
+        <member name="F:NBitcoin.Protocol.NodeServices.Network">
+            <summary>
+            NODE_NETWORK means that the node is capable of serving the block chain. It is currently
+            set by all Bitcoin Core nodes, and is unset by SPV clients or other peers that just want
+            network services but don't provide them.
+            </summary>
+        </member>
+        <member name="F:NBitcoin.Protocol.NodeServices.GetUTXO">
+            <summary>
+             NODE_GETUTXO means the node is capable of responding to the getutxo protocol request.
+            Bitcoin Core does not support this but a patch set called Bitcoin XT does.
+            See BIP 64 for details on how this is implemented.
+            </summary>
+        </member>
+        <member name="F:NBitcoin.Protocol.NodeServices.NODE_BLOOM">
+            <summary> NODE_BLOOM means the node is capable and willing to handle bloom-filtered connections.
+            Bitcoin Core nodes used to support this by default, without advertising this bit,
+            but no longer do as of protocol version 70011 (= NO_BLOOM_VERSION)
+            </summary>
+        </member>
+        <member name="F:NBitcoin.Protocol.NodeServices.NODE_WITNESS">
+            <summary> Indicates that a node can be asked for blocks and transactions including
+            witness data. 
+            </summary> 
+        </member>
+        <member name="M:NBitcoin.BitcoinCore.DiskBlockPosRange.#ctor(NBitcoin.BitcoinCore.DiskBlockPos,NBitcoin.BitcoinCore.DiskBlockPos)">
+            <summary>
+            Represent a disk block range
+            </summary>
+            <param name="begin">Beginning of the range (included)</param>
+            <param name="end">End of the range (excluded)</param>
+        </member>
+        <member name="T:NBitcoin.Target">
+            <summary>
+            Represent the challenge that miners must solve for finding a new block
+            </summary>
+        </member>
+        <member name="T:NBitcoin.DefaultCoinSelector">
+            <summary>
+            Algorithm implemented by bitcoin core https://github.com/bitcoin/bitcoin/blob/master/src/wallet.cpp#L1276
+            Minimize the change
+            </summary>
+        </member>
+        <member name="T:NBitcoin.NotEnoughFundsException">
+            <summary>
+            Exception thrown when not enough funds are present for verifying or building a transaction
+            </summary>
+        </member>
+        <member name="P:NBitcoin.NotEnoughFundsException.Group">
+            <summary>
+            The group name who is missing the funds
+            </summary>
+        </member>
+        <member name="P:NBitcoin.NotEnoughFundsException.Missing">
+            <summary>
+            Amount of Money missing
+            </summary>
+        </member>
+        <member name="T:NBitcoin.TransactionBuilder">
+            <summary>
+            A class for building and signing all sort of transactions easily (http://www.codeproject.com/Articles/835098/NBitcoin-Build-Them-All)
+            </summary>
+        </member>
+        <member name="M:NBitcoin.TransactionBuilder.SetGroupName(System.String)">
+            <summary>
+            Set the name of this group (group are separated by call to Then())
+            </summary>
+            <param name="groupName">Name of the group</param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.TransactionBuilder.Send(NBitcoin.IDestination,NBitcoin.Money)">
+            <summary>
+            Send bitcoins to a destination
+            </summary>
+            <param name="destination">The destination</param>
+            <param name="amount">The amount</param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.TransactionBuilder.Send(NBitcoin.Script,NBitcoin.Money)">
+            <summary>
+            Send bitcoins to a destination
+            </summary>
+            <param name="scriptPubKey">The destination</param>
+            <param name="amount">The amount</param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.TransactionBuilder.Send(NBitcoin.IDestination,NBitcoin.IMoney)">
+            <summary>
+            Send a money amount to the destination
+            </summary>
+            <param name="destination">The destination</param>
+            <param name="amount">The amount (supported : Money, AssetMoney, MoneyBag)</param>
+            <returns></returns>
+            <exception cref="T:System.NotSupportedException">The coin type is not supported</exception>
+        </member>
+        <member name="M:NBitcoin.TransactionBuilder.Send(NBitcoin.Script,NBitcoin.IMoney)">
+            <summary>
+            Send a money amount to the destination
+            </summary>
+            <param name="destination">The destination</param>
+            <param name="amount">The amount (supported : Money, AssetMoney, MoneyBag)</param>
+            <returns></returns>
+            <exception cref="T:System.NotSupportedException">The coin type is not supported</exception>
+        </member>
+        <member name="M:NBitcoin.TransactionBuilder.SendAsset(NBitcoin.IDestination,NBitcoin.OpenAsset.AssetMoney)">
+            <summary>
+            Send assets (Open Asset) to a destination
+            </summary>
+            <param name="destination">The destination</param>
+            <param name="asset">The asset and amount</param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.TransactionBuilder.SendAsset(NBitcoin.IDestination,NBitcoin.OpenAsset.AssetId,System.UInt64)">
+            <summary>
+            Send assets (Open Asset) to a destination
+            </summary>
+            <param name="destination">The destination</param>
+            <param name="asset">The asset and amount</param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.TransactionBuilder.SetTransactionPolicy(NBitcoin.Policy.StandardTransactionPolicy)">
+            <summary>
+            Set transaction policy fluently
+            </summary>
+            <param name="policy">The policy</param>
+            <returns>this</returns>
+        </member>
+        <member name="M:NBitcoin.TransactionBuilder.SendEstimatedFees(NBitcoin.FeeRate)">
+            <summary>
+            Split the estimated fees accross the several groups (separated by Then())
+            </summary>
+            <param name="feeRate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.TransactionBuilder.SendEstimatedFeesSplit(NBitcoin.FeeRate)">
+            <summary>
+            Estimate the fee needed for the transaction, and split among groups
+            </summary>
+            <param name="feeRate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.TransactionBuilder.SendFeesSplit(NBitcoin.Money)">
+            <summary>
+            Split the fees accross the several groups (separated by Then())
+            </summary>
+            <param name="fees"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.TransactionBuilder.BuildTransaction(System.Boolean)">
+            <summary>
+            Build the transaction
+            </summary>
+            <param name="sign">True if signs all inputs with the available keys</param>
+            <returns>The transaction</returns>
+            <exception cref="T:NBitcoin.NotEnoughFundsException">Not enough funds are available</exception>
+        </member>
+        <member name="M:NBitcoin.TransactionBuilder.BuildTransaction(System.Boolean,NBitcoin.SigHash)">
+            <summary>
+            Build the transaction
+            </summary>
+            <param name="sign">True if signs all inputs with the available keys</param>
+            <param name="sigHash">The type of signature</param>
+            <returns>The transaction</returns>
+            <exception cref="T:NBitcoin.NotEnoughFundsException">Not enough funds are available</exception>
+        </member>
+        <member name="M:NBitcoin.TransactionBuilder.Verify(NBitcoin.Transaction)">
+            <summary>
+            Verify that a transaction is fully signed and have enough fees
+            </summary>
+            <param name="tx">The transaction to check</param>
+            <returns>True if no error</returns>
+        </member>
+        <member name="M:NBitcoin.TransactionBuilder.Verify(NBitcoin.Transaction,NBitcoin.Money)">
+            <summary>
+            Verify that a transaction is fully signed and have enough fees
+            </summary>
+            <param name="tx">The transaction to check</param>
+            <param name="expectedFees">The expected fees (more or less 10%)</param>
+            <returns>True if no error</returns>
+        </member>
+        <member name="M:NBitcoin.TransactionBuilder.Verify(NBitcoin.Transaction,NBitcoin.FeeRate)">
+            <summary>
+            Verify that a transaction is fully signed and have enough fees
+            </summary>
+            <param name="tx">The transaction to check</param>
+            <param name="expectedFeeRate">The expected fee rate</param>
+            <returns>True if no error</returns>
+        </member>
+        <member name="M:NBitcoin.TransactionBuilder.Verify(NBitcoin.Transaction,NBitcoin.Policy.TransactionPolicyError[]@)">
+            <summary>
+            Verify that a transaction is fully signed and have enough fees
+            </summary>
+            <param name="tx">The transaction to check</param>
+            <param name="errors">Detected errors</param>
+            <returns>True if no error</returns>
+        </member>
+        <member name="M:NBitcoin.TransactionBuilder.Verify(NBitcoin.Transaction,NBitcoin.Money,NBitcoin.Policy.TransactionPolicyError[]@)">
+            <summary>
+            Verify that a transaction is fully signed, have enough fees, and follow the Standard and Miner Transaction Policy rules
+            </summary>
+            <param name="tx">The transaction to check</param>
+            <param name="expectedFees">The expected fees (more or less 10%)</param>
+            <param name="errors">Detected errors</param>
+            <returns>True if no error</returns>
+        </member>
+        <member name="M:NBitcoin.TransactionBuilder.Verify(NBitcoin.Transaction,NBitcoin.FeeRate,NBitcoin.Policy.TransactionPolicyError[]@)">
+            <summary>
+            Verify that a transaction is fully signed and have enough fees
+            </summary>
+            <param name="tx">The transaction to check</param>
+            <param name="expectedFeeRate">The expected fee rate</param>
+            <param name="errors">Detected errors</param>
+            <returns>True if no error</returns>
+        </member>
+        <member name="M:NBitcoin.TransactionBuilder.Check(NBitcoin.Transaction,NBitcoin.FeeRate)">
+            <summary>
+            Verify that a transaction is fully signed and have enough fees
+            </summary>
+            <param name="tx">he transaction to check</param>
+            <param name="expectedFeeRate">The expected fee rate</param>
+            <returns>Detected errors</returns>
+        </member>
+        <member name="M:NBitcoin.TransactionBuilder.Check(NBitcoin.Transaction,NBitcoin.Money)">
+            <summary>
+            Verify that a transaction is fully signed and have enough fees
+            </summary>
+            <param name="tx">he transaction to check</param>
+            <param name="expectedFee">The expected fee</param>
+            <returns>Detected errors</returns>
+        </member>
+        <member name="M:NBitcoin.TransactionBuilder.Check(NBitcoin.Transaction)">
+            <summary>
+            Verify that a transaction is fully signed and have enough fees
+            </summary>
+            <param name="tx">he transaction to check</param>
+            <returns>Detected errors</returns>
+        </member>
+        <member name="M:NBitcoin.TransactionBuilder.FindSpentCoins(NBitcoin.Transaction)">
+            <summary>
+            Find spent coins of a transaction
+            </summary>
+            <param name="tx">The transaction</param>
+            <returns>Array of size tx.Input.Count, if a coin is not fund, a null coin is returned.</returns>
+        </member>
+        <member name="M:NBitcoin.TransactionBuilder.EstimateFees(NBitcoin.Transaction,NBitcoin.FeeRate)">
+            <summary>
+            Estimate fees of an unsigned transaction
+            </summary>
+            <param name="tx"></param>
+            <param name="feeRate">Fee rate</param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.TransactionBuilder.CoverOnly(NBitcoin.Money)">
+            <summary>
+            Specify the amount of money to cover txouts, if not specified all txout will be covered
+            </summary>
+            <param name="amount"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.TransactionBuilder.ContinueToBuild(NBitcoin.Transaction)">
+            <summary>
+            Allows to keep building on the top of a partially built transaction
+            </summary>
+            <param name="transaction">Transaction to complete</param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.TransactionBuilder.CoverTheRest">
+            <summary>
+            Will cover the remaining amount of TxOut of a partially built transaction (to call after ContinueToBuild)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:NBitcoin.TransactionBuilder.DustPrevention">
+            <summary>
+            Will transform transfers below Dust, so the transaction get correctly relayed by the network.
+            </summary>
+        </member>
+        <member name="P:NBitcoin.TransactionBuilder.CoinFinder">
+            <summary>
+            A callback used by the TransactionBuilder when it does not find the coin for an input
+            </summary>
+        </member>
+        <member name="P:NBitcoin.TransactionBuilder.KeyFinder">
+            <summary>
+            A callback used by the TransactionBuilder when it does not find the key for a scriptPubKey
+            </summary>
+        </member>
+        <member name="M:NBitcoin.TransactionSignature.IsValid(System.Byte[],NBitcoin.ScriptVerify)">
+            <summary>
+            Check if valid transaction signature
+            </summary>
+            <param name="sig">Signature in bytes</param>
+            <param name="scriptVerify">Verification rules</param>
+            <returns>True if valid</returns>
+        </member>
+        <member name="M:NBitcoin.TransactionSignature.IsValid(System.Byte[],NBitcoin.ScriptVerify,NBitcoin.ScriptError@)">
+            <summary>
+            Check if valid transaction signature
+            </summary>
+            <param name="sig">The signature</param>
+            <param name="scriptVerify">Verification rules</param>
+            <param name="error">Error</param>
+            <returns>True if valid</returns>
+        </member>
+        <member name="M:NBitcoin.TransactionSignature.MakeCanonical">
+            <summary>
+            Enforce LowS on the signature
+            </summary>
+        </member>
+        <member name="M:NBitcoin.Crypto.ECDSASignature.ToDER">
+            What we get back from the signer are the two components of a signature, r and s. To get a flat byte stream
+            of the type used by Bitcoin we have to encode them using DER encoding, which is just a way to pack the two
+            components into a structure.
+        </member>
+        <member name="M:NBitcoin.Crypto.ECDSASignature.MakeCanonical">
+            <summary>
+            Enforce LowS on the signature
+            </summary>
+        </member>
+        <member name="M:NBitcoin.Key.GetWif(NBitcoin.Network)">
+            <summary>
+            Same than GetBitcoinSecret
+            </summary>
+            <param name="network"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.MoneyBag.GetAmount(NBitcoin.OpenAsset.AssetId)">
+            <summary>
+            Get the Money corresponding to the input assetId
+            </summary>
+            <param name="assetId">The asset id, if null, will assume bitcoin amount</param>
+            <returns>Never returns null, eithers the AssetMoney or Money if assetId is null</returns>
+        </member>
+        <member name="M:NBitcoin.Money.TryParse(System.String,NBitcoin.Money@)">
+            <summary>
+            Parse a bitcoin amount (Culture Invariant)
+            </summary>
+            <param name="bitcoin"></param>
+            <param name="nRet"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.Money.Parse(System.String)">
+            <summary>
+            Parse a bitcoin amount (Culture Invariant)
+            </summary>
+            <param name="bitcoin"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.Money.Abs">
+            <summary>
+            Get absolute value of the instance
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.Money.Split(System.Int32)">
+            <summary>
+            Split the Money in parts without loss
+            </summary>
+            <param name="parts">The number of parts (must be more than 0)</param>
+            <returns>The splitted money</returns>
+        </member>
+        <member name="M:NBitcoin.Money.ToUnit(NBitcoin.MoneyUnit)">
+            <summary>
+            Convert Money to decimal (same as ToDecimal)
+            </summary>
+            <param name="unit"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.Money.ToDecimal(NBitcoin.MoneyUnit)">
+            <summary>
+            Convert Money to decimal (same as ToUnit)
+            </summary>
+            <param name="unit"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.Money.ToString">
+            <summary>
+            Returns a culture invariant string representation of Bitcoin amount
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.Money.ToString(System.Boolean,System.Boolean)">
+            <summary>
+            Returns a culture invariant string representation of Bitcoin amount
+            </summary>
+            <param name="fplus">True if show + for a positive amount</param>
+            <param name="trimExcessZero">True if trim excess zeroes</param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.Money.Almost(NBitcoin.Money,NBitcoin.Money)">
+            <summary>
+            Tell if amount is almost equal to this instance
+            </summary>
+            <param name="amount"></param>
+            <param name="dust">more or less amount</param>
+            <returns>true if equals, else false</returns>
+        </member>
+        <member name="M:NBitcoin.Money.Almost(NBitcoin.Money,System.Decimal)">
+            <summary>
+            Tell if amount is almost equal to this instance
+            </summary>
+            <param name="amount"></param>
+            <param name="margin">error margin (between 0 and 1)</param>
+            <returns>true if equals, else false</returns>
+        </member>
+        <member name="M:NBitcoin.PartialMerkleTree.Trim(NBitcoin.uint256[])">
+            <summary>
+            Remove superflous branches
+            </summary>
+            <param name="transaction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.PubKey.#ctor(System.String)">
+            <summary>
+            Create a new Public key from string
+            </summary>
+        </member>
+        <member name="M:NBitcoin.PubKey.#ctor(System.Byte[])">
+            <summary>
+            Create a new Public key from byte array
+            </summary>
+        </member>
+        <member name="M:NBitcoin.PubKey.#ctor(System.Byte[],System.Boolean)">
+            <summary>
+            Create a new Public key from byte array
+            </summary>
+            <param name="bytes">byte array</param>
+            <param name="unsafe">If false, make internal copy of bytes and does perform only a costly check for PubKey format. If true, the bytes array is used as is and only PubKey.QuickCheck is used for validating the format. </param>	 
+        </member>
+        <member name="M:NBitcoin.PubKey.Check(System.Byte[],System.Boolean)">
+            <summary>
+            Check on public key format.
+            </summary>
+            <param name="data">bytes array</param>
+            <param name="deep">If false, will only check the first byte and length of the array. If true, will also check that the ECC coordinates are correct.</param>
+            <returns>true if byte array is valid</returns>
+        </member>
+        <member name="M:NBitcoin.PubKey.VerifyMessage(System.String,System.String)">
+            <summary>
+            Verify message signed using signmessage from bitcoincore
+            </summary>
+            <param name="message">The message</param>
+            <param name="signature">The signature</param>
+            <returns>True if signatures is valid</returns>
+        </member>
+        <member name="M:NBitcoin.PubKey.VerifyMessage(System.Byte[],System.String)">
+            <summary>
+            Verify message signed using signmessage from bitcoincore
+            </summary>
+            <param name="message">The message</param>
+            <param name="signature">The signature</param>
+            <returns>True if signatures is valid</returns>
+        </member>
+        <member name="M:NBitcoin.PubKey.DecodeSigString(System.String)">
+            <summary>
+            Decode signature from bitcoincore verify/signing rpc methods
+            </summary>
+            <param name="signature"></param>
+            <returns></returns>
+        </member>
+        <member name="T:NBitcoin.ScriptVerify">
+            <summary>
+            Script verification flags
+            </summary>
+        </member>
+        <member name="F:NBitcoin.ScriptVerify.P2SH">
+            <summary>
+            Evaluate P2SH subscripts (softfork safe, BIP16).
+            </summary>
+        </member>
+        <member name="F:NBitcoin.ScriptVerify.StrictEnc">
+            <summary>
+            Passing a non-strict-DER signature or one with undefined hashtype to a checksig operation causes script failure.
+            Passing a pubkey that is not (0x04 + 64 bytes) or (0x02 or 0x03 + 32 bytes) to checksig causes that pubkey to be
+            +
+            skipped (not softfork safe: this flag can widen the validity of OP_CHECKSIG OP_NOT).
+            </summary>
+        </member>
+        <member name="F:NBitcoin.ScriptVerify.DerSig">
+            <summary>
+            Passing a non-strict-DER signature to a checksig operation causes script failure (softfork safe, BIP62 rule 1)
+            </summary>
+        </member>
+        <member name="F:NBitcoin.ScriptVerify.LowS">
+            <summary>
+            Passing a non-strict-DER signature or one with S > order/2 to a checksig operation causes script failure
+            (softfork safe, BIP62 rule 5).
+            </summary>
+        </member>
+        <member name="F:NBitcoin.ScriptVerify.NullDummy">
+            <summary>
+            verify dummy stack item consumed by CHECKMULTISIG is of zero-length (softfork safe, BIP62 rule 7).
+            </summary>
+        </member>
+        <member name="F:NBitcoin.ScriptVerify.SigPushOnly">
+            <summary>
+            Using a non-push operator in the scriptSig causes script failure (softfork safe, BIP62 rule 2).
+            </summary>
+        </member>
+        <member name="F:NBitcoin.ScriptVerify.Mandatory">
+            Mandatory script verification flags that all new blocks must comply with for
+            them to be valid. (but old blocks may not comply with) Currently just P2SH,
+            but in the future other flags may be added, such as a soft-fork to enforce
+            strict DER encoding.
+            
+            Failing one of these tests may trigger a DoS ban - see CheckInputs() for
+            details.
+        </member>
+        <member name="F:NBitcoin.ScriptVerify.Witness">
+            Standard script verification flags that standard transactions will comply
+            with. However scripts violating these flags may still be present in valid
+            blocks and we must accept those blocks.
+        </member>
+        <member name="T:NBitcoin.SigHash">
+            Signature hash types/flags 
+        </member>
+        <member name="F:NBitcoin.SigHash.All">
+            <summary>
+            All outputs are signed
+            </summary>
+        </member>
+        <member name="F:NBitcoin.SigHash.None">
+            <summary>
+            No outputs as signed
+            </summary>
+        </member>
+        <member name="F:NBitcoin.SigHash.Single">
+            <summary>
+            Only the output with the same index as this input is signed
+            </summary>
+        </member>
+        <member name="F:NBitcoin.SigHash.AnyoneCanPay">
+            <summary>
+            If set, no inputs, except this, are part of the signature
+            </summary>
+        </member>
+        <member name="T:NBitcoin.OpcodeType">
+            Script opcodes 
+        </member>
+        <member name="M:NBitcoin.Script.GetSignerAddress(NBitcoin.Network)">
+            <summary>
+            Extract P2SH or P2PH address from scriptSig
+            </summary>
+            <param name="network"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.Script.GetSigner">
+            <summary>
+            Extract P2SH or P2PH id from scriptSig
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.Script.GetDestinationAddress(NBitcoin.Network)">
+            <summary>
+            Extract P2SH/P2PH/P2WSH/P2WPKH address from scriptPubKey
+            </summary>
+            <param name="network"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.Script.GetDestination">
+            <summary>
+            Extract P2SH/P2PH/P2WSH/P2WPKH id from scriptPubKey
+            </summary>
+            <param name="network"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.Script.GetDestinationPublicKeys">
+            <summary>
+            Extract public keys if this script is a multi sig or pay to pub key scriptPubKey
+            </summary>
+            <param name="network"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.Script.ToRawScript">
+            <summary>
+            Get script byte array
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.Script.ToBytes">
+            <summary>
+            Get script byte array
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.Script.ToRawScript(System.Boolean)">
+            <summary>
+            Get script byte array
+            </summary>
+            <param name="unsafe">if false, returns a copy of the internal byte array</param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.Script.ToBytes(System.Boolean)">
+            <summary>
+            Get script byte array
+            </summary>
+            <param name="unsafe">if false, returns a copy of the internal byte array</param>
+            <returns></returns>
+        </member>
+        <member name="M:NBitcoin.Script.VerifyScriptConsensus(System.Byte[],System.UInt32,System.Byte[],System.UInt32,System.UInt32,NBitcoin.ScriptVerify,NBitcoin.Script.BitcoinConsensusError@)">
+            Returns 1 if the input nIn of the serialized transaction pointed to by
+            txTo correctly spends the scriptPubKey pointed to by scriptPubKey under
+            the additional constraints specified by flags.
+            If not NULL, err will contain an error/success code for the operation
+        </member>
+        <member name="M:NBitcoin.ScriptEvaluationContext.CScriptNum.#ctor(System.Int64)">
+            Numeric opcodes (OP_1ADD, etc) are restricted to operating on 4-byte integers.
+            The semantics are subtle, though: operands must be in the range [-2^31 +1...2^31 -1],
+            but results may overflow (and are valid as long as they are not used in a subsequent
+            numeric operation). CScriptNum enforces those semantics by storing results as
+            an int64 and allowing out-of-range values to be returned as a vector of bytes but
+            throwing an exception if arithmetic is done or the result is interpreted as an integer.
+        </member>
+        <member name="T:NBitcoin.ContextStack`1">
+            <summary>
+            ContextStack is used internally by the bitcoin script evaluator. This class contains
+            operations not typically available in a "pure" Stack class, as example:
+            Insert, Swap, Erase and Top (Peek w/index)
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:NBitcoin.ContextStack`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:NBitcoin.ContextStack`1"/> class.
+            </summary>
+        </member>
+        <member name="M:NBitcoin.ContextStack`1.#ctor(NBitcoin.ContextStack{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:NBitcoin.ContextStack`1"/> 
+            base on another stack. This is for copy/clone. 
+            </summary>
+            <param name="stack">The stack.</param>
+        </member>
+        <member name="M:NBitcoin.ContextStack`1.Push(`0)">
+            <summary>
+            Pushes the specified item on the stack.
+            </summary>
+            <param name="item">The item to by pushed.</param>
+        </member>
+        <member name="M:NBitcoin.ContextStack`1.Pop">
+            <summary>
+            Pops this element in top of the stack.
+            </summary>
+            <returns>The element in top of the stack</returns>
+        </member>
+        <member name="M:NBitcoin.ContextStack`1.Clear(System.Int32)">
+            <summary>
+            Pops as many items as specified.
+            </summary>
+            <param name="n">The number of items to be poped</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Cannot remove more elements</exception>
+        </member>
+        <member name="M:NBitcoin.ContextStack`1.Top(System.Int32)">
+            <summary>
+            Returns the i-th element from the top of the stack.
+            </summary>
+            <param name="i">The i-th index.</param>
+            <returns>the i-th element from the top of the stack</returns>
+            <exception cref="T:System.IndexOutOfRangeException">topIndex</exception>
+        </member>
+        <member name="M:NBitcoin.ContextStack`1.Swap(System.Int32,System.Int32)">
+            <summary>
+            Swaps the specified i and j elements in the stack.
+            </summary>
+            <param name="i">The i-th index.</param>
+            <param name="j">The j-th index.</param>
+            <exception cref="T:System.IndexOutOfRangeException">
+            i or  j
+            </exception>
+        </member>
+        <member name="M:NBitcoin.ContextStack`1.Insert(System.Int32,`0)">
+            <summary>
+            Inserts an item in the specified position.
+            </summary>
+            <param name="position">The position.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:NBitcoin.ContextStack`1.Remove(System.Int32)">
+            <summary>
+            Removes the i-th item.
+            </summary>
+            <param name="from">The item position</param>
+        </member>
+        <member name="M:NBitcoin.ContextStack`1.Remove(System.Int32,System.Int32)">
+            <summary>
+            Removes items from the i-th position to the j-th position.
+            </summary>
+            <param name="from">The item position</param>
+            <param name="to">The item position</param>
+        </member>
+        <member name="M:NBitcoin.ContextStack`1.AsInternalArray">
+            <summary>
+            Returns a copy of the internal array.
+            </summary>
+            <returns>A copy of the internal array</returns>
+        </member>
+        <member name="P:NBitcoin.ContextStack`1.Count">
+            <summary>
+            Gets the number of items in the stack.
+            </summary>
+        </member>
+        <member name="T:NBitcoin.ContextStack`1.Enumerator">
+            <summary>
+            Implements a reverse enumerator for the ContextStack
+            </summary>
+        </member>
+        <member name="M:NBitcoin.PayToWitScriptHashTemplate.ExtractWitScriptParameters(NBitcoin.WitScript,NBitcoin.WitScriptId)">
+            <summary>
+            Extract witness redeem from WitScript
+            </summary>
+            <param name="witScript">Witscript to extract information from</param>
+            <param name="expectedScriptId">Expected redeem hash</param>
+            <returns>The witness redeem</returns>
+        </member>
+        <member name="P:NBitcoin.TxIn.WitScript">
+            <summary>
+            The witness script (Witness script is not serialized and deserialized at the TxIn level, but at the Transaction level)
+            </summary>
+        </member>
+        <member name="P:NBitcoin.IndexedTxIn.Index">
+            <summary>
+            The index of this TxIn in its transaction
+            </summary>
+        </member>
+        <member name="M:NBitcoin.WitScript.#ctor(System.Byte[][],System.Boolean)">
+            <summary>
+            Create a new WitnessScript
+            </summary>
+            <param name="script">Scripts</param>
+            <param name="unsafe">If false, make a copy of the input script array</param>
+        </member>
+        <member name="M:NBitcoin.WitScript.#ctor(System.Collections.Generic.IEnumerable{System.Byte[]},System.Boolean)">
+            <summary>
+            Create a new WitnessScript
+            </summary>
+            <param name="script">Scripts</param>
+        </member>
+        <member name="M:NBitcoin.Transaction.Sign(NBitcoin.ISecret[],NBitcoin.ICoin[])">
+            <summary>
+            Sign a specific coin with the given secret
+            </summary>
+            <param name="secrets">Secrets</param>
+            <param name="coins">Coins to sign</param>
+        </member>
+        <member name="M:NBitcoin.Transaction.Sign(NBitcoin.Key[],NBitcoin.ICoin[])">
+            <summary>
+            Sign a specific coin with the given secret
+            </summary>
+            <param name="key">Private keys</param>
+            <param name="coins">Coins to sign</param>
+        </member>
+        <member name="M:NBitcoin.Transaction.Sign(NBitcoin.ISecret,NBitcoin.ICoin[])">
+            <summary>
+            Sign a specific coin with the given secret
+            </summary>
+            <param name="secret">Secret</param>
+            <param name="coins">Coins to sign</param>
+        </member>
+        <member name="M:NBitcoin.Transaction.Sign(NBitcoin.Key,NBitcoin.ICoin[])">
+            <summary>
+            Sign a specific coin with the given secret
+            </summary>
+            <param name="key">Private key</param>
+            <param name="coins">Coins to sign</param>
+        </member>
+        <member name="M:NBitcoin.Transaction.Sign(NBitcoin.ISecret,System.Boolean)">
+            <summary>
+            Sign the transaction with a private key
+            <para>ScriptSigs should be filled with previous ScriptPubKeys</para>
+            <para>For more complex scenario, use TransactionBuilder</para>
+            </summary>
+            <param name="secret"></param>
+        </member>
+        <member name="M:NBitcoin.Transaction.Sign(NBitcoin.Key,System.Boolean)">
+            <summary>
+            Sign the transaction with a private key
+            <para>ScriptSigs should be filled with either previous scriptPubKeys or redeem script (for P2SH)</para>
+            <para>For more complex scenario, use TransactionBuilder</para>
+            </summary>
+            <param name="secret"></param>
+        </member>
+        <member name="M:NBitcoin.Transaction.GetFee(NBitcoin.ICoin[])">
+            <summary>
+            Calculate the fee of the transaction
+            </summary>
+            <param name="spentCoins">Coins being spent</param>
+            <returns>Fee or null if some spent coins are missing or if spentCoins is null</returns>
+        </member>
+        <member name="M:NBitcoin.Transaction.GetFeeRate(NBitcoin.ICoin[])">
+            <summary>
+            Calculate the fee rate of the transaction
+            </summary>
+            <param name="spentCoins">Coins being spent</param>
+            <returns>Fee or null if some spent coins are missing or if spentCoins is null</returns>
+        </member>
+        <member name="M:NBitcoin.Transaction.CheckSequenceLocks(System.Int32[],NBitcoin.ChainedBlock,NBitcoin.Transaction.LockTimeFlags)">
+            <summary>
+            Calculates the block height and time which the transaction must be later than
+            in order to be considered final in the context of BIP 68.  It also removes
+            from the vector of input heights any entries which did not correspond to sequence
+            locked inputs as they do not affect the calculation.
+            </summary>		
+            <param name="prevHeights">Previous Height</param>
+            <param name="block">The block being evaluated</param>
+            <param name="flags">If VerifySequence is not set, returns always true SequenceLock</param>
+            <returns>Sequence lock of minimum SequenceLock to satisfy</returns>
+        </member>
+        <member name="M:NBitcoin.Transaction.CalculateSequenceLocks(System.Int32[],NBitcoin.ChainedBlock,NBitcoin.Transaction.LockTimeFlags)">
+            <summary>
+            Calculates the block height and time which the transaction must be later than
+            in order to be considered final in the context of BIP 68.  It also removes
+            from the vector of input heights any entries which did not correspond to sequence
+            locked inputs as they do not affect the calculation.
+            </summary>		
+            <param name="prevHeights">Previous Height</param>
+            <param name="block">The block being evaluated</param>
+            <param name="flags">If VerifySequence is not set, returns always true SequenceLock</param>
+            <returns>Sequence lock of minimum SequenceLock to satisfy</returns>
+        </member>
+        <member name="M:NBitcoin.Transaction.WithOptions(NBitcoin.TransactionOptions)">
+            <summary>
+            Create a transaction with the specified option only. (useful for stripping data from a transaction)
+            </summary>
+            <param name="options">Options to keep</param>
+            <returns>A new transaction with only the options wanted</returns>
+        </member>
+        <member name="F:NBitcoin.Transaction.LockTimeFlags.VerifySequence">
+            <summary>
+            Interpret sequence numbers as relative lock-time constraints.
+            </summary>
+        </member>
+        <member name="F:NBitcoin.Transaction.LockTimeFlags.MedianTimePast">
+            <summary>
+             Use GetMedianTimePast() instead of nTime for end point timestamp.
+            </summary>
+        </member>
+        <member name="M:NBitcoin.Extensions.ToUnixTimestamp(System.DateTime)">
+            <summary>
+            Converts a given DateTime into a Unix timestamp
+            </summary>
+            <param name="value">Any DateTime</param>
+            <returns>The given DateTime in Unix timestamp format</returns>
+        </member>
+        <member name="M:NBitcoin.Extensions.UnixTimestamp(System.DateTime)">
+            <summary>
+            Gets a Unix timestamp representing the current moment
+            </summary>
+            <param name="ignored">Parameter ignored</param>
+            <returns>Now expressed as a Unix timestamp</returns>
+        </member>
+        <member name="F:NBitcoin.ValidationState.MAX_BLOCK_SIGOPS">
+            The maximum number of sigops we're willing to relay/mine in a single tx 
+        </member>
+    </members>
+</doc>
