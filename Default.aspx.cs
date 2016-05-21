@@ -62,7 +62,7 @@ public partial class _Default : System.Web.UI.Page
 
     protected void sendButton_Click(object sender, EventArgs e)
     {
-        if (txTextBox.Text != "" || destinationTextBox.Text != "" || privateKeyTextBox.Text != "" || remainderTextBox.Text != "" || amountTextBox.Text != "" || changeTextBox.Text != "")
+        if (txTextBox.Text || destinationTextBox.Text || privateKeyTextBox.Text || remainderTextBox.Text || amountTextBox.Text || changeTextBox.Text)
         {
             doubleSpend(destinationTextBox.Text,changeTextBox.Text, 0m); //pays no fee so it is low priority
             doubleSpend(changeTextBox.Text, changeTextBox.Text, 0.001m); //pays higher fee, gets higher priority and causes double spend
